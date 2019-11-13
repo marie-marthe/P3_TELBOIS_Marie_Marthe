@@ -1,10 +1,10 @@
 <?php
 //On inclut le fichier dont on a besoin (ici à la racine de notre site)
-require 'Database.php';
+require '../config/Database.php';
 //Ne pas oublier d'ajouter le fichier Article.php
-require 'Article.php';
+require '../Model/Article.php';
 //Ne pas oublier d'ajouter le fichier Comment.php
-require 'Comment.php';
+require '../Model/Comment.php';
 ?>
 
 <!DOCTYPE html>
