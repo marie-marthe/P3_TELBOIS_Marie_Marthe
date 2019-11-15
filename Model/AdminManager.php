@@ -1,20 +1,22 @@
 <?php
 
+namespace MarieMarthe\Blog\Model;
+
+
 
 class AdminManager extends Manager
-
 {
-    public function checkLogin($login, $password)
-    {
+    public function checkLogin($login, $password) 
+    {  
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT login, password FROM administrateur WHERE login = ?');
         $req->execute(array($login));
         $admin = $req->fetch();
         $hash = sha1($_POST['password']);
-
+       
         if ($admin['password'] == $hash) {
             $adminInfo = array(
-                'login' => $admin['login']
+               'login' => $admin['login']
             );
             return $adminInfo;
         } else {
@@ -30,5 +32,5 @@ class AdminManager extends Manager
         }
         return false;
     }
-
+    
 }
