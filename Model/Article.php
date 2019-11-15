@@ -1,57 +1,33 @@
 <?php
+require_once("model/Manager.php");
 
-class Article extends Database
+class Article extends Manager
 {
-
-
-    /**
-     * Pour afficher tous les articles */
-
-    public function getArticles()
+    public function getPosts()
     {
-        $sql = 'SELECT id, title, content, author, createdAt FROM article ORDER BY id DESC';
-        return $this->createQuery($sql);
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC');
+
+        return $req;
     }
 
-
-    /**
-     * Pour afficher le contenu d'un article */
-
-    public function getArticle($articleId)
+    public function getPost($postId)
     {
-        $sql = 'SELECT id, title, content, author, createdAt FROM article WHERE id = ?';
-        return $this->createQuery($sql, [$articleId]);
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
+        $req->execute(array($postId));
+        $post = $req->fetch();
 
+        return $post;
     }
 
-    /**
-     * Méthode ajouter un article
-     */
-    public function addArticle($title, $content)
+    public function getCheckPost($postId)
     {
-        $sql = 'INSERT INTO article(title, content, createdAt)' . ' values(?,?, NOW())';
-        $article = $this->executeRequest($sql, array($title, $content));
-        return $article;
-    }
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT exists (SELECT * FROM posts WHERE id = ?) AS post_exist');
+        $req->execute(array($postId));
+        $check = $req->fetch();
 
-    /**
-     * Méthode mettre à jour un Article
-     */
-    public function updateArticle($title, $content, $id)
-    {
-        $sql = 'UPDATE article SET title = ? , content = ? WHERE id = ?';
-        $article = $this->executeRequest($sql, array($title, $content, $id));
-        return $article;
+        return $check;
     }
-
-    /**
-     * Méthode supprimer un Article
-     */
-    public function deletePArticle($id)
-    {
-        $sql = 'DELETE FROM post WHERE id = ?';
-        $article = $this->executeRequest($sql, array($id));
-        return $article;
-    }
-
 }
