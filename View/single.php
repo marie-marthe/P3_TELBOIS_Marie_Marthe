@@ -1,8 +1,8 @@
 <?php
 //On inclut le fichier dont on a besoin (ici à la racine de notre site)
 require '../config/Database.php';
-//Ne pas oublier d'ajouter le fichier Article.php
-require '../Model/Article.php';
+//Ne pas oublier d'ajouter le fichier Chapter.php
+require '../Model/Chapter.php';
 //Ne pas oublier d'ajouter le fichier Comment.php
 require '../Model/Comment.php';
 ?>
@@ -19,7 +19,7 @@ require '../Model/Comment.php';
     <h1>Mon blog</h1>
     <p>En construction</p>
     <?php
-    $article = new Article();
+    $article = new Chapter();
     $articles = $article->getArticle($_GET['articleId']);
     $article = $articles->fetch()
     ?>

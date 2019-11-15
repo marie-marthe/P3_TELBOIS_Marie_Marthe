@@ -1,90 +1,34 @@
 <?php
+
+
 class AdminManager extends Manager
+
 {
-
-    public function getLogin($login)
+    public function checkLogin($login, $password)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM users WHERE login = :login');
-        $req->execute(array(
-            'login' => $login));
-        $loginAdmin = $req->fetch();
+        $req = $db->prepare('SELECT login, password FROM administrateur WHERE login = ?');
+        $req->execute(array($login));
+        $admin = $req->fetch();
+        $hash = sha1($_POST['password']);
 
-        return $loginAdmin;
-    }
-
-    public function getReportingAdmin()
-    {
-        $db = $this->dbConnect();
-        $reporting = $db->prepare('SELECT * FROM posts AS p INNER JOIN comments AS c ON c.post_id = p.id INNER JOIN reporting AS r ON c.id = r.comment_id');
-        $reporting->execute();
-
-        return $reporting;
-    }
-
-    public function setDeleteReport($commentId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comments WHERE id = ?');
-        $deleteComment = $req->execute(array($commentId));
-
-        if ($deleteComment === false) {
-            throw new Exception('Impossible de supprimer le commentaire !');
+        if ($admin['password'] == $hash) {
+            $adminInfo = array(
+                'login' => $admin['login']
+            );
+            return $adminInfo;
+        } else {
+            return false;
         }
-        else {
-            $req = $db->prepare('DELETE FROM reporting WHERE comment_id = ?');
-            $deleteReporting = $req->execute(array($commentId));
 
-            return $deleteReporting;
+    }
+
+    public function isAdmin()
+    {
+        if (isset($_SESSION['administrateur']) && !empty($_SESSION['administrateur'])) {
+            return $_SESSION['administrateur'] === true;
         }
+        return false;
     }
 
-    public function setCancelReport($reportId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM reporting WHERE id = ?');
-        $deleteReporting = $req->execute(array($reportId));
-
-        return $deleteReporting;
-    }
-
-    public function setNewPost()
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?, ?, NOW())');
-        $affectedLines = $req->execute(array($_POST['title'], $_POST['chapterContent']));
-
-        return $affectedLines;
-    }
-
-    public function setChangePost($postId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE posts SET title = ?, content=? WHERE `posts`.`id` = ?');
-        $affectedLines = $req->execute(array($_POST['title'], $_POST['chapterContent'], $postId));
-
-        return $affectedLines;
-    }
-
-    public function setDeletePost($postId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM posts WHERE id = ?');
-        $affectedLines = $req->execute(array($postId));
-
-        if ($affectedLines === false) {
-            throw new Exception('Impossible de supprimer le chapitre !');
-        }
-        else {
-            $comments = $db->prepare('SELECT * FROM comments WHERE post_id = ?');
-            $comments->execute(array($postId));
-
-            while ($comment = $comments->fetch())
-            {
-                $deleteComments= $this->setDeleteReport($comment['id']);
-            }
-
-            return $deleteComments;
-        }
-    }
 }

@@ -2,60 +2,72 @@
 require_once("model/Manager.php");
 
 class Comment extends Manager
+
 {
-    public function getComments($postId)
+    public function getComments($chapterId)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
+        $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE chapter_id = ? ORDER BY comment_date DESC');
+        $comments->execute(array($chapterId));
 
         return $comments;
     }
 
-    public function postComment($postId, $author, $comment)
+    public function getComment($commentId)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author, $comment));
-
-        return $affectedLines;
-    }
-
-    public function getReporting($postId)
-    {
-        $db = $this->dbConnect();
-        $reporting = $db->prepare('SELECT * FROM posts AS p INNER JOIN comments AS c ON c.post_id = p.id INNER JOIN reporting AS r ON c.id = r.comment_id WHERE p.id = ?');
-        $reporting->execute(array($postId));
-
-        return $reporting;
-    }
-
-    public function postReporting($commentId)
-    {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO reporting(comment_id, reporting_date) VALUES(?, NOW())');
-        $affectedLines = $comments->execute(array($commentId));
-
-        return $affectedLines;
-    }
-
-    public function getCheckComment($commentId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT exists (SELECT * FROM comments WHERE id = ?) AS comment_exist');
+        $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
         $req->execute(array($commentId));
-        $check = $req->fetch();
+        $comment = $req->fetch();
 
-        return $check;
+        return $comment;
     }
 
-    public function getCheckReport($reportId)
+    public function chapterComment($chapterId, $author, $comment)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT exists (SELECT * FROM reporting WHERE id = ?) AS report_exist');
-        $req->execute(array($reportId));
-        $check = $req->fetch();
+        $comments = $db->prepare('INSERT INTO comments(chapter_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+        $affectedLines = $comments->execute(array($chapterId, $author, $comment));
 
-        return $check;
+        return $affectedLines;
+    }
+
+    public function signalComment($commentId)
+    {
+        $db = $this-> dbConnect();
+        $req = $db->prepare('UPDATE comments SET signal_comment = 1 WHERE id = ?');
+        $req->execute(array($commentId));
+        $signal = $req->rowCount();
+
+        return $signal;
+    }
+
+    public function getSignalComments()
+    {
+        $db = $this->dbConnect();
+        $comments = $db->query('SELECT comments.id, chapters.title, comments.chapter_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y \') AS comment_date_fr FROM comments INNER JOIN chapters ON chapters.id = comments.chapter_id WHERE signal_comment =1 ORDER BY comment_date DESC');
+
+        return $comments;
+
+    }
+
+    public function deleteComment($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM comments WHERE id = ?');
+        $req->execute(array($id));
+        $delete = $req->rowCount();
+
+        return $delete;
+    }
+
+    public function approveComment($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET signal_comment = 0 WHERE id = ?');
+        $req->execute(array($id));
+        $signal = $req->rowCount();
+
+        return $signal;
     }
 }
