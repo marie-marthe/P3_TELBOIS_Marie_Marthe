@@ -1,9 +1,3 @@
-<?php 
-
-$chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
-$chapters = $chapterManager->getChapters();
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -37,7 +31,7 @@ $chapters = $chapterManager->getChapters();
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="index.php?action=listChapters" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chapitres</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php while($data = $chapters->fetch()): ?>
+                        <?php while($data = $MenuChapters->fetch()): ?>
                             <a class="dropdown-item" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
                         <?php endwhile; ?>   
                         </div>
