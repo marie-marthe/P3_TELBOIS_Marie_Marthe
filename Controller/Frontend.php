@@ -13,7 +13,8 @@ require_once 'model/AdminManager.php';
 
 class Frontend extends Manager
 {
-    function connection($login, $password) 
+
+    public function connection($login, $password)
     {
         $adminManager = new \MarieMarthe\Blog\Model\AdminManager();
         $adminInfo = $adminManager->checkLogin($login, $password);
@@ -30,7 +31,7 @@ class Frontend extends Manager
         }
     }
 
-    function listChapters()
+    public function listChapters()
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
         $chapters = $chapterManager->getChapters();
@@ -38,7 +39,7 @@ class Frontend extends Manager
         include 'view/frontend/listChaptersView.php';
     }
 
-    function chapter()
+    public function chapter()
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -49,7 +50,7 @@ class Frontend extends Manager
         include 'view/frontend/chapterView.php';
     }
 
-    function comment()
+    public function comment()
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
         $comment = $commentManager->getComment($_GET['id']);
@@ -57,7 +58,7 @@ class Frontend extends Manager
         include 'view/frontend/commentView.php';
     }
 
-    function addComment($chapterId, $author, $comment)
+    public function addComment($chapterId, $author, $comment)
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
 
@@ -70,7 +71,7 @@ class Frontend extends Manager
         }
     }
 
-    function signalComment($commentId, $chapterId)
+    public function signalComment($commentId, $chapterId)
     {
         $commentManager = new CommentManager();
         $signal = $commentManager->signalComment($commentId);

@@ -1,9 +1,3 @@
-<?php 
-
-$chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
-$chapters = $chapterManager->getChapters();
-?>
-
 <!DOCTYPE html>
 <html>
 
