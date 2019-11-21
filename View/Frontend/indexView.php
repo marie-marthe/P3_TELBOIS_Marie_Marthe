@@ -10,7 +10,8 @@
 			<h2>Bienvenue sur mon blog</h2>
 			<br>
 			<img class="col-sm-12 col-md-5" src="public/img/livre.jpg" alt="livre">
-			<p class="col-sm-12 col-md-7">Pour mon nouveau livre "Billet pour l'Alaska", je souhaiterai vous inviter à collaborer avec moi. Comment? Tout simplement en me laissant vos commentaires sur les chapitres que je mettrai en ligne. Vos commentaires seront une matière précieuse pour nourrir mon imagination. Une nouvelle forme d'écriture, d'échanges entre les lecteurs et l'auteur. </p>
+			<p class="col-sm-12 col-md-7">Pour mon nouveau livre "Billet pour l'Alaska", je souhaiterai vous inviter à collaborer avec moi.
+               Tout simplement en me laissant vos commentaires sur les chapitres que je mettrai en ligne.</p>
 		</div>
 	<div class="jumbotron row">
 			<h1 class="text-center">Chapitres</h1>
