@@ -2,6 +2,7 @@
 
 <?php  ob_start(); ?>
 
+
 <div class="container">
     <div class="jumbotron jumbotron-fluid mot_de_passe">
         <h1 class="pass"><strong>Mot de passe</strong></h1>

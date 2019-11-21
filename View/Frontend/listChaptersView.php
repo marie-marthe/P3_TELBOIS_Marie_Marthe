@@ -7,9 +7,9 @@
         <h1 class="chapitre">Billet pour l'Alaska</h1>
         <h2 class="bienvenue">Bienvenue sur mon blog</h2>
         <div class="row align-items-start">
-            <img class="col-4" src="public/img/chapitre.jpg" alt="livre">
-            <p class="col-8" id="bienvenue"><strong>Pour mon nouveau livre "Billet pour l'Alaska", je vous proposes de vistez mon BLOG !!!
-                    <br> Vous aurez la possibilité de me laisser vos commentaires sur les chapitres que je mettrai en ligne. </strong> </p>
+            <img class="col-4" src="public/img/livre.jpg" alt="livre">
+            <p class="col-8" id="bienvenue"><strong>Pour mon nouveau livre "Billet pour l'Alaska", je souhaiterai vous inviter à collaborer avec moi. Comment? Tout simplement en me laissant vos commentaires sur les chapitres que je mettrai en ligne. Vos commentaires seront une matière précieuse pour nourrir mon imagination.<br>Vous respecterez, bien entendu, un minimum de règles élémentaires juridiques et/ou de courtoisie (je me reserve le droit de supprimer ou non tous commentaires signalés).<br>
+            Une nouvelle forme d'écriture, d'échanges entre les lecteurs et l'auteur.</strong> </p>
         </div>
     </div>
     <div class="jumbotron jumbotron-fluid">

@@ -1,14 +1,18 @@
 <?php
 
+
 if (session_status() == PHP_SESSION_NONE) :
     session_start();
 endif;
 
+
 require 'controller/Frontend.php';
 require 'controller/Backend.php';
 
+
 $frontend = new MarieMarthe\Blog\Controller\Frontend();
 $backend = new MarieMarthe\Blog\Controller\Backend();
+
 
 try {
     if (isset($_GET['action'])) {
