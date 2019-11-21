@@ -56,9 +56,11 @@ $chapters = $chapterManager->getChapters();
     <?= $content ?>    
 
     <footer class="text-center">
-        -
-        <a class="nav-link" href="index.php?action=connexion"><i class="fa fa-user fa-2x"></i></a>
-
+        <a class="btn btn-default" href="#"><i class="fa fa-twitter fa-2x"></i></a>
+        <a class="btn btn-default" href="#"><i class="fa fa-facebook fa-2x"></i></a>
+        <a class="btn btn-default" href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+        <a class="btn btn-default" href="#"><i class="fa fa-flickr fa-2x"></i></a>
+        <a class="btn btn-default" href="#"><i class="fa fa-spotify fa-2x"></i></a>
     </footer>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
