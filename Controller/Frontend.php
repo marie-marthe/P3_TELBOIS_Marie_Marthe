@@ -14,8 +14,17 @@ require_once 'model/AdminManager.php';
 class Frontend extends Manager
 {
 
+
+    private $menuChapters;
+
+    public function __construct() {
+        $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
+        $this->menuChapters = $chapterManager->getChapters();
+    }
+
     public function connection($login, $password)
     {
+        $MenuChapters = $this->menuChapters;
         $adminManager = new \MarieMarthe\Blog\Model\AdminManager();
         $adminInfo = $adminManager->checkLogin($login, $password);
         
@@ -33,14 +42,16 @@ class Frontend extends Manager
 
     public function listChapters()
     {
+        $MenuChapters = $this->menuChapters;
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
-        $chapters = $chapterManager->getChapters();
+        $chapters = $MenuChapters;
         
         include 'view/frontend/listChaptersView.php';
     }
 
     public function chapter()
     {
+        $MenuChapters = $this->menuChapters;
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
 
@@ -52,6 +63,7 @@ class Frontend extends Manager
 
     public function comment()
     {
+        $MenuChapters = $this->menuChapters;
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
         $comment = $commentManager->getComment($_GET['id']);
 
@@ -60,6 +72,7 @@ class Frontend extends Manager
 
     public function addComment($chapterId, $author, $comment)
     {
+        $MenuChapters = $this->menuChapters;
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
 
         $affectedLines = $commentManager->chapterComment($chapterId, $author, $comment);
@@ -73,6 +86,7 @@ class Frontend extends Manager
 
     public function signalComment($commentId, $chapterId)
     {
+        $MenuChapters = $this->menuChapters;
         $commentManager = new CommentManager();
         $signal = $commentManager->signalComment($commentId);
         if ($signal > 0) {

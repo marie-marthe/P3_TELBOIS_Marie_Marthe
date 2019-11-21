@@ -6,7 +6,7 @@ namespace MarieMarthe\Blog\Model;
 
 class AdminManager extends Manager
 {
-    public function checkLogin($login, $password) 
+    public function checkLogin($login,$password)
     {  
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT login, password FROM administrateur WHERE login = ?');
@@ -20,6 +20,7 @@ class AdminManager extends Manager
             );
             return $adminInfo;
         } else {
+            echo 'Erreur de mot de passe';
             return false;
         }
 
@@ -31,6 +32,7 @@ class AdminManager extends Manager
             return $_SESSION['administrateur'] === true;
         }
         return false;
+
     }
     
 }
