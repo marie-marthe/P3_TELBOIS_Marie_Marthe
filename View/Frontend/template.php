@@ -1,8 +1,5 @@
 <?php
 
-$chapterManager = new MarieMarthe\Blog\Model\ChapterManager();
-$chapters = $chapterManager->getChapters();
-
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +35,10 @@ $chapters = $chapterManager->getChapters();
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="index.php?action=listChapters" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chapitres</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php while($data = $chapters->fetch()): ?>
+                        <?php while($data = $MenuChapters->fetch()): ?>
                             <a class="dropdown-item" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
                         <?php endwhile; ?>   
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=connexion">Admin</a>
                     </li>
                 </ul>
             </div>
@@ -56,11 +50,8 @@ $chapters = $chapterManager->getChapters();
     <?= $content ?>    
 
     <footer class="text-center">
-        <a class="btn btn-default" href="#"><i class="fa fa-twitter fa-2x"></i></a>
-        <a class="btn btn-default" href="#"><i class="fa fa-facebook fa-2x"></i></a>
-        <a class="btn btn-default" href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-        <a class="btn btn-default" href="#"><i class="fa fa-flickr fa-2x"></i></a>
-        <a class="btn btn-default" href="#"><i class="fa fa-spotify fa-2x"></i></a>
+
+        <a class="btn btn-default" href="index.php?action=connexion"><i class="fa fa-user fa-2x"></i></a>
     </footer>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

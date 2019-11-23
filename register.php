@@ -10,27 +10,36 @@ if(isset($_POST['confirm_register'])) {
            $password = trim(htmlspecialchars($_POST['password']));
            $password_confirm = trim(htmlspecialchars($_POST['password_confirm']));
 
-           if(strlen($login) >= 3 AND strlen($login) <=10){
-               if(strlen($password)>=8 AND strlen($password)<=100) {
-                   if($password==$password_confirm){
-                       die('ok');
+           if(strlen($login) >= 3 AND strlen($login) <= 10) {
+               if(strlen($password) >= 4 AND strlen($password) <= 100) {
+                   if($password == $password_confirm){
+                       $password_crypted = sha1($password);
+                       $req = $db->prepare("INSERT INTO administrateur (login,password)VALUES (?,?)");
+                       $req->execute(array($login, $password));
+
+                       $error= " Votre à été crée avec succès";
 
                    } else {
                        $error = " Vos mots de passes ne correspondent pas";
                    }
 
                } else {
-                   $error = " Votre mot de passe doit comprter entre 8 et 100 caractères " ;
+                   $error = " Votre mot de passe doit comprter entre 8 et 100 caractères ";
                }
            } else {
-               $error = " Votre login doit comporter entre 3 et 10 caractères " ;
+               $error = " Votre login doit comporter entre 3 et 10 caractères ";
            }
+       } else {
+           $error = " Veuillez remplir tous les champs ! ";
        }
 
     }
 }
 
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -84,6 +93,9 @@ if(isset($_POST['confirm_register'])) {
         </tr>
     </table>
 </form>
+
+<?php if (isset($error)) {echo $error;} ?>
+
       <nav>
           <a href="login.php">Déja un compte ? Connectez-vous ! </a>
       </nav>
