@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -28,14 +27,14 @@
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item">
-                        <a class="nav-link" href="index.php?action=listChaptersBackend">Accueil<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../index.php?action=listChaptersBackend">Accueil<span class="sr-only">(current)</span></a>
                     </li>
 				<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="index.php?action=listChaptersBackend" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chapitres</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php while($data = $MenuChapters->fetch()): ?>
                             <a class="dropdown-item" href="index.php?action=chapterBackend&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
-                        <?php endwhile; ?>   
+                        <?php endwhile; ?>
                         </div>
                     </li>
 					<li class="nav-item">

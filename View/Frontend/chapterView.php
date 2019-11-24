@@ -13,7 +13,7 @@
         <?php while ($comment = $comments->fetch()): ?>
         <p><strong><?= htmlspecialchars($comment['author']) ?><br></strong>le <?= $comment['comment_date_fr'] ?></p>
         <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-        <a href="index.php?action=signalComment&amp;id=<?= $comment['id']; ?>&amp;chapterId=<?= $_GET['id']; ?>"> (signaler)</a>
+        <a href="index.php?action=signalComment&amp;id=<?= $comment['id']; ?>&amp;chapterId=<?= $_GET['id']; ?>"> (Signaler)</a>
         <br><br>
         <?php endwhile; ?>
         <p><strong>Ajoutez un commentaire si vous le voulez!</strong></p>

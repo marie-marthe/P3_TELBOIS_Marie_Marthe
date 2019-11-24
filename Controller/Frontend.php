@@ -22,9 +22,14 @@ class Frontend extends Manager
         $this->menuChapters = $chapterManager->getChapters();
     }
 
-    public function connection($login, $password)
+    public function connexion()
     {
-        $MenuChapters = $this->menuChapters;
+        include 'view/frontend/connexionView.php';
+    }
+
+    public function login ($login, $password)
+    {
+
         $adminManager = new \MarieMarthe\Blog\Model\AdminManager();
         $adminInfo = $adminManager->checkLogin($login, $password);
         

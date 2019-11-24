@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if (session_status() == PHP_SESSION_NONE) :
     session_start();
@@ -17,10 +20,10 @@ $backend = new MarieMarthe\Blog\Controller\Backend();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'connexion') {
-            include 'view/frontend/connexionView.php';
+            $frontend->connexion();
         } elseif ($_GET['action'] === 'login') {
             if (!empty($_POST['login']) AND !empty($_POST['password'])) {
-                    $frontend->connection($_POST['login'], ($_POST['password']));
+                    $frontend->login($_POST['login'], ($_POST['password']));
             } else {
                 throw new Exception('Le login et/ou le mot de passe sont incorrects');
             }
