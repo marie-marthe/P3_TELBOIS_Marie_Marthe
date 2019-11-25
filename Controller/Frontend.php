@@ -27,6 +27,9 @@ class Frontend extends Manager
         include 'view/frontend/connexionView.php';
     }
 
+    // fonction login qui execute la fonction login du model
+    // renvoie un message sur le statut de la confirmation
+    // redirige sur la pag
     public function login ($login, $password)
     {
 
@@ -38,7 +41,7 @@ class Frontend extends Manager
             $_SESSION['administrateur'] = true;
             $_SESSION['login'] = $adminInfo['login'];
             $this->setFlash('Vous êtes à présent connecté', 'info');
-            header('Location: index.php?action=listChaptersBackend');
+            header('Location: index.php?action=listChaptersViewBackend');
         } else {
             $this->setFlash('Identifiants incorrects', 'warning');
             include 'view/frontend/connexionView.php';
@@ -66,6 +69,7 @@ class Frontend extends Manager
         include 'view/frontend/chapterView.php';
     }
 
+    //liste tous les commentaires
     public function comment()
     {
         $MenuChapters = $this->menuChapters;
@@ -75,6 +79,7 @@ class Frontend extends Manager
         include 'view/frontend/commentView.php';
     }
 
+    //ajouter un commentaire ou le modifier
     public function addComment($chapterId, $author, $comment)
     {
         $MenuChapters = $this->menuChapters;
@@ -89,6 +94,7 @@ class Frontend extends Manager
         }
     }
 
+    //Signaler un commentaire
     public function signalComment($commentId, $chapterId)
     {
         $MenuChapters = $this->menuChapters;

@@ -10,8 +10,10 @@ require_once 'model/Manager.php';
 
 class Backend extends Manager
 {
-    
-    
+
+    // constructeur de la partie backend
+    // on initialise la variable interface sur Admin
+    // fonction qui vérifie si l'admin est loggé pour accéder aux fonctionnalités
     public function __construct()
     {
         parent::__construct();
@@ -39,6 +41,7 @@ class Backend extends Manager
         include 'view/backend/chapterViewBackend.php';
     }
 
+    //ajouter un chapitre
     function addChapter($title, $content)
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -52,6 +55,7 @@ class Backend extends Manager
         }
     }
 
+    //Modifier un chapitre
     function modifyChapter($id, $title, $content)
     {    
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -64,6 +68,7 @@ class Backend extends Manager
         }
     }
 
+    // Effacer un article
     function deleteChapter($id)
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -85,6 +90,7 @@ class Backend extends Manager
         include 'view/frontend/commentView.php';
     }
 
+        //Signaler un commentaire
     function signalCommentBackend() 
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -92,7 +98,7 @@ class Backend extends Manager
         
         include 'view/backend/signalCommentView.php';
     }
-
+    // Effacer un commentaire
     function deleteComment($id)
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -105,6 +111,7 @@ class Backend extends Manager
         }
     }
 
+    //Moderer un commentaire
     function approveComment($id)
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -117,6 +124,8 @@ class Backend extends Manager
         }
     }
 
+    // function déconnecte un admin en réinitiallisant les varibles SESSION
+    // On renvoie sur la page d'accueil
     function logOut()
     {
         session_destroy();
