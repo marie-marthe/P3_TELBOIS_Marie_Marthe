@@ -63,11 +63,11 @@ class Frontend extends Manager
     //Affiche les chapitres et les commentaires associés
     public function chapter()
     {
-        $MenuChapters = $this->menuChapters;
+        $menuChapters = $this->menuChapters;
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
 
-        $chapter = $chapterManager->getChapter($_GET['id']);
+        $chapters = $chapterManager->getChapter($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
     
         include 'view/frontend/chapterView.php';

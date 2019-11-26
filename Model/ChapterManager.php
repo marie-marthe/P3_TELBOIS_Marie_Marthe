@@ -2,7 +2,7 @@
 
 namespace MarieMarthe\Blog\Model;
 
-
+require_once "model/Manager.php";
 
 
 class ChapterManager extends Manager
