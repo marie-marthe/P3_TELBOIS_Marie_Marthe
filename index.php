@@ -1,37 +1,30 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if (session_status() == PHP_SESSION_NONE) :
     session_start();
 endif;
 
-
-require 'controller/Frontend.php';
-require 'controller/Backend.php';
-
+require 'controller/frontend.php';
+require 'controller/backend.php';
 
 $frontend = new MarieMarthe\Blog\Controller\Frontend();
 $backend = new MarieMarthe\Blog\Controller\Backend();
 
-
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'connexion') {
-            $frontend->connexion();
+            include 'view/frontend/connexionView.php';
         } elseif ($_GET['action'] === 'login') {
             if (!empty($_POST['login']) AND !empty($_POST['password'])) {
-                    $frontend->login($_POST['login'], ($_POST['password']));
+                $frontend->login($_POST['login'], ($_POST['password']));
             } else {
                 throw new Exception('Le login et/ou le mot de passe sont incorrects');
             }
         } elseif ($_GET['action'] === 'chapter') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $frontend->chapter($_GET['id']);
+                $frontend->chapter($_GET['id']);
             } else {
-                    throw new Exception('Aucun identifiant de chapitre envoyé');
+                throw new Exception('Aucun identifiant de chapitre envoyé');
             }
         } elseif ($_GET['action'] =='comment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -44,11 +37,11 @@ try {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                     $frontend->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 } else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
+                    throw new Exception('Tous les champs ne sont pas remplis !');
                 }
             } else {
-                throw new Exception('Aucun identifiant de commentaire envoyé'); 
-            } 
+                throw new Exception('Aucun identifiant de commentaire envoyé');
+            }
         } elseif ($_GET['action'] == 'signalComment') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 $frontend->signalComment($_GET['id'], $_GET['chapterId']);
@@ -77,13 +70,13 @@ try {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
             } else {
-                throw new Exception('Aucun identifiant de chapitre envoyé'); 
+                throw new Exception('Aucun identifiant de chapitre envoyé');
             }
         } elseif ($_GET['action'] == 'deleteChapter') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $backend->deleteChapter($_GET['id']);
             } else {
-                throw new Exception('Aucun identifiant de chapitre envoyé'); 
+                throw new Exception('Aucun identifiant de chapitre envoyé');
             }
         } elseif ($_GET['action'] == 'commentSignal') {
             $backend->signalCommentBackend();
@@ -91,20 +84,20 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $backend->deleteComment($_GET['id']);
             } else {
-                throw new Exception('Aucun identifiant de commentaire envoyé'); 
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] == 'approveComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $backend->approveComment($_GET['id']);
             } else {
-                throw new Exception('Aucun identifiant de commentaire envoyé'); 
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] == 'deconnexion') {
             $backend->logOut();
-        } 
+        }
     } else {
         $frontend->listChapters();
-    } 
+    }
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();

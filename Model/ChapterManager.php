@@ -2,9 +2,8 @@
 
 namespace MarieMarthe\Blog\Model;
 
-use PDOStatement;
 
-require_once "Manager.php";
+
 
 class ChapterManager extends Manager
 {
@@ -16,7 +15,7 @@ class ChapterManager extends Manager
     public function getChapters()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM chapters ORDER BY creation_date DESC LIMIT 1,3');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM chapters ORDER BY creation_date');
 
         return $req;
     }
@@ -35,10 +34,8 @@ class ChapterManager extends Manager
         $req->execute(array($chapterId));
         $chapter = $req->fetch();
 
-        return $chapter; 
+        return $chapter;
     }
-
-
 
     // Méthode ajouter un chapitre
 
@@ -52,21 +49,20 @@ class ChapterManager extends Manager
         return $affectedLines;
     }
 
-
     // Méthode mettre à jour un chapitre
 
-
     public function updateChapter($id, $title, $content)
-    {    
+    {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE chapters SET title= :newTitle, content= :newContent WHERE id = :id');
         $req->bindValue(':id', $_GET['id'], \PDO::PARAM_INT);
         $req->bindValue(':newTitle', $_POST['title'], \PDO::PARAM_STR);
         $req->bindValue(':newContent', $_POST['content'], \PDO::PARAM_STR);
         $affectedLines = $req->execute(array(':id' => $id, ':newTitle' => $title,':newContent' => $content));
-        
+
         return $affectedLines;
     }
+
 
 
     // Méthode supprimer un chapitre

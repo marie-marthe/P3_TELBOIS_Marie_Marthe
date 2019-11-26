@@ -16,7 +16,7 @@
         <a href="index.php?action=signalComment&amp;id=<?= $comment['id']; ?>&amp;chapterId=<?= $_GET['id']; ?>"> (Signaler)</a>
         <br><br>
         <?php endwhile; ?>
-        <p><strong>Ajoutez un commentaire si vous le voulez!</strong></p>
+        <p><strong>Ajoutez un commentaire </strong></p>
             <form class="comment" action="index.php?action=addComment&amp;id=<?= $chapter['id'] ?>" method="post">
                 <div>
                     <label for="author">Auteur</label><br>

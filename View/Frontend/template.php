@@ -33,7 +33,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="index.php?action=listChapters" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chapitres</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php while($data = $Menuchapters->fetch()): ?>
+                            <?php while($data = $chapters->fetch()): ?>
                                 <a class="dropdown-item" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>"><?= $data['title'] ?></a>
                             <?php endwhile; ?>
                         </div>

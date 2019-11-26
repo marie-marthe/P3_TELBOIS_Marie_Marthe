@@ -2,9 +2,7 @@
 
 namespace MarieMarthe\Blog\Model;
 
-use PDOStatement;
 
-require_once "model/Manager.php";
 
 class CommentManager extends Manager
 {
