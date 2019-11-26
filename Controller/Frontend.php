@@ -27,9 +27,10 @@ class Frontend extends Manager
         include 'view/frontend/connexionView.php';
     }
 
+
     // fonction login qui execute la fonction login du model
     // renvoie un message sur le statut de la confirmation
-    // redirige sur la pag
+    // redirige sur la page
     public function login ($login, $password)
     {
 
@@ -48,6 +49,7 @@ class Frontend extends Manager
         }
     }
 
+    //Affiche les chapitres
     public function listChapters()
     {
         $MenuChapters = $this->menuChapters;
@@ -57,6 +59,8 @@ class Frontend extends Manager
         include 'view/frontend/listChaptersView.php';
     }
 
+
+    //Affiche les chapitres et les commentaires associés
     public function chapter()
     {
         $MenuChapters = $this->menuChapters;
@@ -79,7 +83,7 @@ class Frontend extends Manager
         include 'view/frontend/commentView.php';
     }
 
-    //ajouter un commentaire ou le modifier
+    //Ajouter un commentaire
     public function addComment($chapterId, $author, $comment)
     {
         $MenuChapters = $this->menuChapters;

@@ -6,7 +6,9 @@ namespace MarieMarthe\Blog\Model;
 
 class AdminManager extends Manager
 {
-    public function checkLogin($login,$password)
+    
+    
+    public function checkLogin($login, $password)
     {  
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT login, password FROM administrateur WHERE login = ?');

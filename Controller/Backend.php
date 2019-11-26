@@ -23,6 +23,7 @@ class Backend extends Manager
         }
     }
 
+    //Affiche les chapitres
     function listChaptersBackend()
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -31,6 +32,7 @@ class Backend extends Manager
         include 'view/backend/listChaptersViewBackend.php';
     }
 
+    //Affiche les chapitres et les commentaires associés
     function chapterBackend()
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -41,7 +43,7 @@ class Backend extends Manager
         include 'view/backend/chapterViewBackend.php';
     }
 
-    //ajouter un chapitre
+    //Ajouter un chapitre
     function addChapter($title, $content)
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -68,7 +70,7 @@ class Backend extends Manager
         }
     }
 
-    // Effacer un article
+    //Effacer un article
     function deleteChapter($id)
     {
         $chapterManager = new \MarieMarthe\Blog\Model\ChapterManager();
@@ -90,7 +92,7 @@ class Backend extends Manager
         include 'view/frontend/commentView.php';
     }
 
-        //Signaler un commentaire
+    //Signaler un commentaire
     function signalCommentBackend() 
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -98,7 +100,7 @@ class Backend extends Manager
         
         include 'view/backend/signalCommentView.php';
     }
-    // Effacer un commentaire
+    //Effacer un commentaire
     function deleteComment($id)
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
@@ -111,7 +113,7 @@ class Backend extends Manager
         }
     }
 
-    //Moderer un commentaire
+    //Approuver un commentaire
     function approveComment($id)
     {
         $commentManager = new \MarieMarthe\Blog\Model\CommentManager();
