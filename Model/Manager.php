@@ -1,6 +1,7 @@
 <?php
 
 namespace MarieMarthe\Blog\Model;
+// dans cette classe, on se connecte à la BDD
 
 class Manager
 {   

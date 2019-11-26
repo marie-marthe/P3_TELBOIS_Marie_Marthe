@@ -2,10 +2,17 @@
 
 namespace MarieMarthe\Blog\Model;
 
+use PDOStatement;
+
 require_once "Manager.php";
 
 class ChapterManager extends Manager
 {
+
+
+     //Pour afficher tous les posts
+     //@return PDOStatement
+
     public function getChapters()
     {
         $db = $this->dbConnect();
@@ -13,6 +20,13 @@ class ChapterManager extends Manager
 
         return $req;
     }
+
+
+      //Pour afficher le contenu d'un chapitre
+      //@param $chapterId
+      //@return mixed
+      //@throws ChapterManager
+
 
     public function getChapter($chapterId)
     {
@@ -24,6 +38,11 @@ class ChapterManager extends Manager
         return $chapter; 
     }
 
+
+
+    // Méthode ajouter un chapitre
+
+
     public function ajoutChapter($title, $content)
     {
         $db = $this->dbConnect();
@@ -32,6 +51,10 @@ class ChapterManager extends Manager
 
         return $affectedLines;
     }
+
+
+    // Méthode mettre à jour un chapitre
+
 
     public function updateChapter($id, $title, $content)
     {    
@@ -44,7 +67,11 @@ class ChapterManager extends Manager
         
         return $affectedLines;
     }
-    
+
+
+    // Méthode supprimer un chapitre
+
+
     public function deleteChapter($id)
     {
         $db = $this->dbConnect();

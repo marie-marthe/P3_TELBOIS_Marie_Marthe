@@ -2,10 +2,17 @@
 
 namespace MarieMarthe\Blog\Model;
 
+use PDOStatement;
+
 require_once "model/Manager.php";
 
 class CommentManager extends Manager
 {
+
+    //Afficher les commentaires d'un chapitre
+    //@param $chapterId
+    // @return PDOStatement
+
     public function getComments($chapterId)
     {
         $db = $this->dbConnect();
@@ -14,7 +21,12 @@ class CommentManager extends Manager
 
         return $comments;
     }
-    
+
+
+    //Afficher les commentaires d'un post
+    //@param $commentId
+    // @return PDOStatement
+
     public function getComment($commentId)
     {
         $db = $this->dbConnect();
@@ -25,6 +37,14 @@ class CommentManager extends Manager
         return $comment;
     }
 
+
+    //Permet l'enregistrement d'un nouveau commentaire lors d'une saisie dans le formulaire présent dans chapterView.php
+    //@param $author
+    // @param $chapterId
+    // @param $comment
+    //@return bool
+
+
     public function chapterComment($chapterId, $author, $comment)
     {
         $db = $this->dbConnect();
@@ -33,6 +53,9 @@ class CommentManager extends Manager
 
         return $affectedLines;
     }
+
+
+    //Méthode pour enregistrer le signalement d'un commentaire dans la BDD.
 
     public function signalComment($commentId)
     {
@@ -44,6 +67,9 @@ class CommentManager extends Manager
         return $signal;         
     }
 
+
+    //Méthode pour afficher un commentaire signalé
+
     public function getSignalComments()
     {
         $db = $this->dbConnect();
@@ -52,6 +78,12 @@ class CommentManager extends Manager
         return $comments;
       
     }
+
+
+
+    //Méthode pour supprimer le commentaire de la BDD
+    //(après signalement)
+
 
     public function deleteComment($id) 
     {
@@ -62,6 +94,9 @@ class CommentManager extends Manager
         
         return $delete;
     }
+
+    //Méthode qui permet de valider le commentaire
+    //(après signalement) via la méthode approveComment dans le Backend.
 
     public function approveComment($id)
     {

@@ -4,10 +4,18 @@ namespace MarieMarthe\Blog\Model;
 
 
 
+ //Les méthodes de la classe AdminManager permettent de vérifier si un utilisateur existe
+ //et de gérer ses propriétés (login, password).
+
+
 class AdminManager extends Manager
 {
-    
-    
+
+    // Vérifie que l'utilisateur existe dans la BDD
+    //$param $login
+    // $param $password
+
+
     public function checkLogin($login, $password)
     {  
         $db = $this->dbConnect();
@@ -35,6 +43,14 @@ class AdminManager extends Manager
         }
         return false;
 
+    }
+
+    public function newPassword($newpassword, $id)
+    {
+        $newpassword = password_hash($newpassword, $id);
+        $req = 'UPDATE administrateur SET password = ? WHERE id = ?';
+        $user = $this->executeRequest($req, array($newpassword, $id));
+        return $user;
     }
     
 }
