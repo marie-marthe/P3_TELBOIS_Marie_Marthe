@@ -1,4 +1,3 @@
-
 <?php  $title = 'Administration'; ?>
 
 <?php ob_start(); ?>
@@ -12,7 +11,11 @@
         <h1 class="chapitre">Chapitres</h1>
             <table class="table table-borderless table-dark">
                 <tbody>
-
+                <?php while($data = $chapters->fetch()): ?>
+                    <tr>
+                        <td scope="row"><?= htmlspecialchars($data['title']) ?><a href="index.php?action=chapterBackend&amp;id=<?= $data['id'] ?>"> (modifier) ou (supprimer)</a></td>
+                    </tr>
+                <?php endwhile; ?>
                 </tbody> 
             </table>
     </div>
@@ -42,4 +45,4 @@
 </script>
 
 <?php $content = ob_get_clean(); ?>
-<?php require 'view/backend/template.php'; ?>
+<?php require ('template.php'); ?>

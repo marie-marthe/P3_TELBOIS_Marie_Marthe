@@ -4,16 +4,16 @@
 
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
-        <img class="col-sm-12 col-md-5" src="../../img/newYork.jpg" alt="new york">
+        <img class="col-sm-12 col-md-5" src="../../public/img/newYork.jpg" alt="new york">
 
         <h1>
-        <?= ($chapter['title']) ?>
+        <?= ($chapters['title']) ?>
         </h1>
         <br><br>
-        <em> le <?= $chapter['creation_date_fr'] ?></em>
+        <em> le <?= $chapters['creation_date_fr'] ?></em>
         <br>
         <p>
-        <?= ($chapter['content']) ?>
+        <?= ($chapters['content']) ?>
         </p>
     </div>
     <div class="jumbotron jumbotron-fluid">
@@ -53,7 +53,7 @@
             </div> 
         </form>
     </div>
-<script type="text/javascript" src="../../../../../../../Users/marie-marthe/Desktop/Blog%20PHP/FINAL/backend/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
     tinyMCE.init({
        mode: "textareas"
@@ -61,4 +61,4 @@
 </script> 
 </div>
 <?php  $content = ob_get_clean(); ?>
-<?php require 'view/backend/template.php'; ?>
+<?php require ('template.php'); ?>

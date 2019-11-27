@@ -4,12 +4,19 @@
 
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
-        <h1><strong><?= ($chapter['title']) ?></strong></h1>
-        <p class="date"><em> le <?= $chapter['creation_date_fr'] ?></em><p>
-        <p><?= ($chapter['content']) ?></p>
+
+        <h1><strong><?= ($chapters['title']) ?></strong></h1>
+
+        <p class="date"><em> le <?= $chapters['creation_date_fr'] ?></em><p>
+
+        <p><?= ($chapters['content']) ?></p>
+
     </div>
+
     <div class="jumbotron jumbotron-fluid">
+
         <h2><strong>Commentaires</strong></h2>
+
         <?php
         while ($comment = $comments->fetch()) {
         ?>
@@ -25,21 +32,21 @@
     </div>
     <div class="jumbotron jumbotron-fluid">
         <h2><strong>Modifier le chapitre</strong></h2>
-        <form name="formulaire" id="formulaire" action="index.php?action=modifyChapter&amp;id=<?= $chapter['id'] ?>" method="post">
-            <input type="hidden" name="id" value="<?= $chapter['id'] ?>">
+        <form name="formulaire" id="formulaire" action="index.php?action=modifyChapter&amp;id=<?= $chapters['id'] ?>" method="post">
+            <input type="hidden" name="id" value="<?= $chapters['id'] ?>">
             <div class="form-group">
                 <label for="title"><strong>Titre</strong></label> : 
-                <input class="form-control" type="text" name="title" id="title" value="<?= nl2br(($chapter['title'])) ?>">
+                <input class="form-control" type="text" name="title" id="title" value="<?= nl2br(($chapters['title'])) ?>">
             </div>
             <div class="form-group">
                 <label for="content"><strong>Nouveau texte :</strong></label> 
-                <textarea id="content" name="content" rows="25" cols="98" ><?= nl2br($chapter['content']) ?></textarea>
+                <textarea id="content" name="content" rows="25" cols="98" ><?= nl2br($chapters['content']) ?></textarea>
             </div>
             <div class="mt-5">
             <input type="submit" value="Modifier"> Ou
             </div>
         </form> 
-        <form name="formulaire" id="formulaire" action="index.php?action=deleteChapter&amp;id=<?= $chapter['id'] ?> " method="post">
+        <form name="formulaire" id="formulaire" action="index.php?action=deleteChapter&amp;id=<?= $chapters['id'] ?> " method="post">
             <div class="delete">
                 <input type="submit" value="Supprimer ce chapitre">
             </div> 
@@ -47,7 +54,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="../../../../../../../Users/marie-marthe/Desktop/Blog%20PHP/FINAL/backend/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
     tinyMCE.init({
        mode: "textareas"
@@ -55,4 +62,4 @@
 </script> 
 
 <?php  $content = ob_get_clean(); ?>
-<?php require 'view/backend/template.php'; ?>
+<?php require ('template.php'); ?>

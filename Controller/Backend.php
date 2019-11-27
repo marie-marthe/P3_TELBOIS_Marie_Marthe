@@ -53,7 +53,7 @@ class Backend extends Manager
             header('Location: index.php?action=listChaptersBackend');
             
         } else {
-            throw new Exception('Impossible d\'ajouter le chapitre !');
+            throw new \Error('Impossible d\'ajouter le chapitre !');
         }
     }
 
@@ -64,7 +64,7 @@ class Backend extends Manager
         $affectedLines = $chapterManager->updateChapter($id, $title, $content);
         
         if ($affectedLines === false) {
-            throw new Exception('Impossible de modifier ce chapitre !');
+            throw new \Error('Impossible de modifier ce chapitre !');
         } else {
             header('Location: index.php?action=listChaptersBackend');
         }
@@ -109,7 +109,7 @@ class Backend extends Manager
         if ($supprimComment > 0) {
             header('Location: index.php?action=commentSignal');
         } else {
-            throw new Exception('Impossible de supprimer ce commentaire !');
+            throw new \Error('Impossible de supprimer ce commentaire !');
         }
     }
 
@@ -122,7 +122,7 @@ class Backend extends Manager
         if ($commentApprove > 0) {
             header('Location: index.php?action=commentSignal');
         } else {
-            throw new Exception('Impossible d\'approuver ce commentaire !');
+            throw new \Error('Impossible d\'approuver ce commentaire !');
         }
     }
 

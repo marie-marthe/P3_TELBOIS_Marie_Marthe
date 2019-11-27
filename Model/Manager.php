@@ -24,6 +24,7 @@ class Manager
         }
     }
 
+    //Méthode de connexion à notre base de données
     protected function dbConnect()
     {
         $db = new \PDO('mysql:host=localhost;dbname=P3_TELBOISMM;charset=utf8', 'root', 'root');
@@ -43,9 +44,3 @@ class Manager
         return (new AdminManager())->isAdmin();
     }
 
-    public function redirect($uri = '/')
-    {
-        header("Location: $uri");
-        exit();
-    }
-}
