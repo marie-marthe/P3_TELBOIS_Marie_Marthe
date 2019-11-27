@@ -17,12 +17,12 @@
 			<br>
 			<img class="col-sm-12 col-md-5 col-md-push-7" src="public/img/chapitre.jpg" alt="chapitre">
     <?php
-        while ($data = $chapter->fetch())
+        while ($data = $chapters->fetch())
     {
     ?>
 			<p class="col-sm-12 col-md-7 col-md-pull-5">J'ai déjà écrit trois<a href="index.php?action=chapter&amp;id=<?= $data['id'] ?>"> chapitres.</a><br>New York<br>La panne<br>Le départ</p>
     <?php
-        $chapter->closeCursor();
+        $chapters->closeCursor();
     }
     ?>
 		</div>

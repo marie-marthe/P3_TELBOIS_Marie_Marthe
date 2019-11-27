@@ -17,7 +17,7 @@
         <br><br>
         <?php endwhile; ?>
         <p><strong>Ajoutez un commentaire si vous le voulez!</strong></p>
-            <form class="comment" action="index.php?action=addComment&amp;id=<?= $chapter['id'] ?>" method="post">
+            <form class="comment" action="index.php?action=addComment&amp;id=<?= $chapters['id'] ?>" method="post">
                 <div>
                     <label for="author">Auteur</label><br>
                     <input type="text" id="author" name="author">

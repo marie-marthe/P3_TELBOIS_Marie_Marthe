@@ -4,7 +4,7 @@ namespace MarieMarthe\Blog\Model;
 // dans cette classe, on se connecte à la BDD
 
 class Manager
-{   
+{
     protected $name;
     protected $config;
     protected $db;
@@ -13,7 +13,7 @@ class Manager
     const FLASH_ERROR = 'danger';
     const FLASH_WARNING = 'warning';
     const FLASH_INFO = 'info';
-    
+
     public function __construct()
     {
         if (!$this->config) {
@@ -28,7 +28,7 @@ class Manager
     protected function dbConnect()
     {
         $db = new \PDO('mysql:host=localhost;dbname=P3_TELBOISMM;charset=utf8', 'root', 'root');
-        
+
         return $db;
     }
 
@@ -43,4 +43,6 @@ class Manager
     {
         return (new AdminManager())->isAdmin();
     }
+
+}
 
